@@ -84,19 +84,19 @@ class Rawlaused(db.Model):
         return 'checklist ' + str(self.id)
     
 @app.route('/', methods=['GET', 'POST']) #avaleht
-def kustuta():
-    return redirect('/')
+def AAAAAAA():
+    return render_template('avaleht.html')
 
 @app.route('/checklist', methods=['GET', 'POST']) #querry code generaator
-def kustuta():
+def kustuta1():
     return redirect('/')
 
 @app.route('/checklist/<string:veebileht>', methods=['GET', 'POST']) #kasutaja checlist
-def kustuta():
+def kustuta2():
     return redirect('/')
 
 @app.route('/checklist/<string:veebileht>/edit', methods=['GET', 'POST']) #editing
-def kustuta():
+def kustuta3():
     return redirect('/')
 
 #debugger 
