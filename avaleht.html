@@ -1,0 +1,65 @@
+{% extends 'baas.html' %}
+
+{% block head %}
+<style>
+
+	body {
+		background-color: #A9A9A9; 
+	}
+	
+	.table {
+		list-style-type: none;
+		border: none;
+		padding-top: 20px;
+		padding-left: 50px;
+	}
+		
+	.button {
+		background-color: #D3D3D3;
+		border: 2px solid #B22222;
+		color: black;
+		padding: 5px;
+		text-align: center;
+		text-decoration: none;
+		font-size: 25px;
+	}
+	
+	.button:hover {
+		background-color: white;
+		border: 2px solid #FFD700;
+	}
+	
+
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+
+<div class="table">
+	<li>
+		<a href="/chekclist" target="_blank" class="button">Genereeri checklist</a>
+	</li>
+</div>
+
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+{% endblock %}
