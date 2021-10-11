@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
+import string
+import random
+import datetime
+
 #from main_programm import db
 #db.create_all()
 #from main_programm import Rawlaused
@@ -14,10 +18,12 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///checklist.db'
 db = SQLAlchemy(app)
 
-class Rawlaused(db.Model):
+class andmebaas(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     
     veebileht = db.Column(db.Text, nullable=False)
+    
+    viimane_uuendus = db.Column(db.Text, nullable=False)
     
     list_1 = db.Column(db.Text)
     list_1_checked = db.Column(db.Integer)
@@ -88,8 +94,22 @@ def AAAAAAA():
     return render_template('avaleht.html')
 
 @app.route('/checklist', methods=['GET', 'POST']) #querry code generaator
-def kustuta1():
-    return redirect('/')
+def generaator():
+    andmed = andmebaas.query.all()
+    string_pikkus = 20
+
+    suvakad_tahed = "".join(random.choice(string.ascii_letters) for i in range(string_pikkus))
+    x = datetime.datetime.now()
+    
+    last_update = 99
+    if last_update != x.day:
+        last_update = x.day
+    
+    uus_leht = andmebaas(veebileht=suvakad_tahed, viimane_uuendus=last_update)
+    db.session.add(uus_leht)
+    db.session.commit()
+    
+    return render_template('/checklist')
 
 @app.route('/checklist/<string:veebileht>', methods=['GET', 'POST']) #kasutaja checlist
 def kustuta2():
