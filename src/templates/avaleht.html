@@ -4,7 +4,7 @@
 <style>
 
 	body {
-		background-color: #f2f2f2; 
+		background-color: #A9A9A9; 
 	}
 	
 	.table {
@@ -15,25 +15,34 @@
 	}
 		
 	.button {
-		background-color: white;
-		border: none;
+		background-color: #D3D3D3;
+		border: 2px solid #B22222;
 		color: black;
 		padding: 5px;
 		text-align: center;
 		text-decoration: none;
 		font-size: 25px;
 	}
+	
+	.button:hover {
+		background-color: white;
+		border: 2px solid #FFD700;
+	}
+	
+
 </style>
 
 {% endblock %}
 
 {% block body %}
 
+
 <div class="table">
 	<li>
-		<a href="https://www.youtube.com/watch?v=PsOKqSDvMzQ" target="_blank" class="button">Tutvustav video</a>
+		<a href="/chekclist" target="_blank" class="button">Genereeri checklist</a>
 	</li>
 </div>
+
 
 
 <script>
