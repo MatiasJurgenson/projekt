@@ -5,8 +5,8 @@ import string
 import random
 import datetime
 
-#from main_programm import db
-#from main_programm import andmebaas
+#from main_test import db
+#from main_test import andmebaas
 #andmebaas.query.all()
 #db.session.delete(andmebaas.query.get())
 #db.session.commit()
@@ -14,7 +14,7 @@ import datetime
 #db.session.add()
 
 
-#dPsAmQrCzjoBircuLKKL
+#/checklist/dPsAmQrCzjoBircuLKKL/1
 
 
 app = Flask(__name__)
@@ -91,40 +91,66 @@ class andmebaas(db.Model):
     dblaused = db.Column(db.Text)
     def __repr__(self):
         return 'checklist ' + str(self.id)
-    
-@app.route('/', methods=['GET', 'POST']) #avaleht
-def AAAAAAA():
-    return render_template('avaleht.html')
 
-@app.route('/checklist', methods=['GET', 'POST']) #querry code generaator
-def generaator():
-    andmed = andmebaas.query.all()
-    string_pikkus = 20
+# kasutaja chcklisti leht    
+@app.route('/checklist/<veebileht_str>/<int:id>', methods=['GET', 'POST'])
+def kasutaja_checklist(veebileht_str, id):
+    
+    kasutaja = andmebaas.query.get_or_404(id)
+    veebikood = kasutaja.veebileht
+    if veebikood == veebileht_str:                                   
+        return render_template('checklist.html', kasutaja=kasutaja)
+    else:
+        return render_template('vale.html')
+    
+# 1 checker    
+@app.route('/checklist/<veebileht_str>/<int:id>/1/<number>', methods=['GET', 'POST'])
+def checker(veebileht_str, id, number):
+    kasutaja = andmebaas.query.get_or_404(id)
+    veebikood = kasutaja.veebileht
+    kasutaja_id = id
+    if veebikood == veebileht_str:
+        if int(number) == 0:
+            kasutaja.list_1_checked = 1
+            db.session.commit()
+            return redirect('/checklist/' + veebikood + "/" + str(id))
+        elif int(number) == 1:
+            kasutaja.list_1_checked = 0
+            db.session.commit()
+            return redirect('/checklist/' + veebikood + "/" + str(id))
+    else:
+        return render_template('vale.html')
 
-    suvakad_tahed = "".join(random.choice(string.ascii_letters) for i in range(string_pikkus))
-    x = datetime.datetime.now()
+#edit page
+@app.route('/checklist/<veebileht_str>/<int:id>/edit', methods=['GET', 'POST'])
+def edit(veebileht_str, id):
     
-    last_update = 99
-    if last_update != x.day:
-        last_update = x.day
-    
-    uus_leht = andmebaas(veebileht=suvakad_tahed, viimane_uuendus=last_update)
-    db.session.add(uus_leht)
-    db.session.commit()
-    
-    
-    
-    return redirect('/checklist/<string:veebileht>')
+    kasutaja = andmebaas.query.get_or_404(id)
+    veebikood = kasutaja.veebileht
+    if veebikood == veebileht_str:
+        if request.method == 'POST':
+            kasutaja.list_1 = request.form['list_1']
+            if kasutaja.list_1_checked == "":
+                kasutaja.list_1_checked = 0
+            db.session.commit()
+            return redirect('/checklist/' + veebikood + "/" + str(id))
+        else:
+            return render_template('edit.html', kasutaja=kasutaja)
+    else:
+        return render_template('vale.html')
 
-@app.route('/checklist/<string:veebileht>')
-def show_subpath(veebileht):
-    if veebileht == 'kasutaja_veebileht':
-        kasutaja_veebileht = veebileht.get() 
-        return render_template('checklist.html', kasutaja_veebileht=kasutaja_veebileht)
-
-@app.route('/checklist/<path:dinamicPath>/edit', methods=['GET', 'POST']) #editing
-def kustuta3():
-    return redirect('/checklist/<path:dinamicPath>')
+# 1 delete
+@app.route('/checklist/<veebileht_str>/<int:id>/edit/delete/1', methods=['GET', 'POST'])
+def kustuta(veebileht_str, id):
+    kasutaja = andmebaas.query.get_or_404(id)
+    veebikood = kasutaja.veebileht
+    if veebikood == veebileht_str:
+        kasutaja.list_1 = ""
+        kasutaja.list_1_checked = ""
+        db.session.commit() 
+        return redirect('/checklist/' + veebikood + "/" + str(id) + "/edit")
+    else:
+        return render_template('vale.html')
 
 #debugger 
 if __name__ == "__main__":

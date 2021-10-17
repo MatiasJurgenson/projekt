@@ -1,1 +1,46 @@
-checklist
+{% extends 'baas.html' %}
+
+{% block head %}
+<style>
+
+	.button {
+		background-color: #D3D3D3;
+		border: 2px solid #B22222;
+		color: black;
+		padding: 5px;
+		text-align: center;
+		text-decoration: none;
+		font-size: 25px;	
+	}
+	
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+<a href="/checklist/{{ kasutaja.veebileht }}/{{ kasutaja.id }}/edit" class="button">muuda</a>
+
+{%if ( (kasutaja.list_1 != 'None') and (kasutaja.list_1_checked == 0) ) %}
+	<a href="/checklist/{{ kasutaja.veebileht }}/{{ kasutaja.id }}/1/0">{{ kasutaja.list_1 }}</a>
+{% endif %}
+{%if ( (kasutaja.list_1 != 'None') and (kasutaja.list_1_checked == 1) ) %}
+	<a href="/checklist/{{ kasutaja.veebileht }}/{{ kasutaja.id }}/1/1"><s>{{ kasutaja.list_1 }}</s></a>
+{% endif %}	
+
+		
+{%if ( (kasutaja.list_2 != 'None') and (kasutaja.list_2_checked == 0) ) %}
+	<a href="/asenda/{{ kasutaja.id }}/1">{{ kasutaja.list_2 }}</a>
+{% endif %}
+{%if ( (kasutaja.list_2 != 'None') and (kasutaja.list_2_checked == 1) ) %}
+	<a href="/asenda/{{ kasutaja.id }}/1"><s>{{ kasutaja.list_2 }}</s></a>
+{% endif %}	
+
+{%if ( (kasutaja.list_3 != 'None') and (kasutaja.list_3_checked == 0) ) %}
+	<a href="/asenda/{{ kasutaja.id }}/1">{{ kasutaja.list_2 }}</a>
+{% endif %}
+{%if ( (kasutaja.list_3 != 'None') and (kasutaja.list_3_checked == 1) ) %}
+	<a href="/asenda/{{ kasutaja.id }}/1"><s>{{ kasutaja.list_3 }}</s></a>
+{% endif %}	
+			
+{% endblock %}

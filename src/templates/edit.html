@@ -1,1 +1,19 @@
-edit
+{% extends 'baas.html' %}
+
+{% block head %}
+		
+{% endblock %}
+
+{% block body %}
+<form action='/checklist/{{ kasutaja.veebileht }}/{{ kasutaja.id }}/edit' method='POST'>
+		1. rida
+		<br>
+		<input type='text' name='list_1' id='list_1' value='{{ kasutaja.list_1 }}'>
+		<br>
+		<a href="/checklist/{{ kasutaja.veebileht }}/{{ kasutaja.id }}/edit/delete/1">kustuta</a>
+		
+		
+		<input type='submit' value='Salvesta'>
+</form>	
+			
+{% endblock %}
