@@ -97,18 +97,47 @@ class andmebaas(db.Model):
 def kasutaja_checklist(veebileht_str, id):
     
     kasutaja = andmebaas.query.get_or_404(id)
-    veebikood = kasutaja.veebileht
-    if veebikood == veebileht_str:                                   
+    veebikood = kasutaja.veebileht   
+    if veebikood == veebileht_str:
+        #vaatab kuna on checklisti viimati uuendatud
+        x = datetime.datetime.now()
+        last_update = kasutaja.viimane_uuendus
+        
+        # kui on uus päev, siis checklist un-checked
+        if last_update != x.day:
+            
+            kasutaja.list_1_checked = 0
+            kasutaja.list_2_checked = 0
+            kasutaja.list_3_checked = 0
+            kasutaja.list_4_checked = 0
+            kasutaja.list_5_checked = 0
+            kasutaja.list_6_checked = 0
+            kasutaja.list_7_checked = 0
+            kasutaja.list_8_checked = 0
+            kasutaja.list_9_checked = 0
+            kasutaja.list_10_checked = 0
+            kasutaja.list_11_checked = 0
+            kasutaja.list_12_checked = 0
+            kasutaja.list_13_checked = 0
+            kasutaja.list_14_checked = 0
+            kasutaja.list_15_checked = 0
+            kasutaja.list_16_checked = 0
+            kasutaja.list_17_checked = 0
+            kasutaja.list_18_checked = 0
+            kasutaja.list_19_checked = 0
+            kasutaja.list_20_checked = 0
+            
+            last_update = x.day
+        
         return render_template('checklist.html', kasutaja=kasutaja)
     else:
         return render_template('vale.html')
-    
+
 # 1 checker    
 @app.route('/checklist/<veebileht_str>/<int:id>/1/<number>', methods=['GET', 'POST'])
-def checker(veebileht_str, id, number):
+def checker1(veebileht_str, id, number):
     kasutaja = andmebaas.query.get_or_404(id)
     veebikood = kasutaja.veebileht
-    kasutaja_id = id
     if veebikood == veebileht_str:
         if int(number) == 0:
             kasutaja.list_1_checked = 1
@@ -120,6 +149,7 @@ def checker(veebileht_str, id, number):
             return redirect('/checklist/' + veebikood + "/" + str(id))
     else:
         return render_template('vale.html')
+
 
 #edit page
 @app.route('/checklist/<veebileht_str>/<int:id>/edit', methods=['GET', 'POST'])
@@ -141,7 +171,7 @@ def edit(veebileht_str, id):
 
 # 1 delete
 @app.route('/checklist/<veebileht_str>/<int:id>/edit/delete/1', methods=['GET', 'POST'])
-def kustuta(veebileht_str, id):
+def kustuta1(veebileht_str, id):
     kasutaja = andmebaas.query.get_or_404(id)
     veebikood = kasutaja.veebileht
     if veebikood == veebileht_str:
