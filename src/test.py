@@ -1,5 +1,5 @@
 import datetime
-last_update = 10
+last_update = 1
 x = datetime.datetime.now()
 print(x.day)
 

@@ -128,8 +128,7 @@ def kasutaja_checklist(veebileht_str, id):
         last_update = kasutaja.viimane_uuendus
         
         # kui on uus päev, siis checklist un-checked
-        if last_update != x.day:
-            
+        if int(last_update) != x.day:
             kasutaja.list_1_checked = 0
             kasutaja.list_2_checked = 0
             kasutaja.list_3_checked = 0
@@ -150,10 +149,10 @@ def kasutaja_checklist(veebileht_str, id):
             kasutaja.list_18_checked = 0
             kasutaja.list_19_checked = 0
             kasutaja.list_20_checked = 0
+            
+            kasutaja.viimane_uuendus = x.day
             db.session.commit()
             
-            last_update = x.day
-        
         return render_template('checklist.html', kasutaja=kasutaja)
     else:
         return render_template('vale.html')
