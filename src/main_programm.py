@@ -107,7 +107,47 @@ def generaator():
     if last_update != x.day:
         last_update = x.day
     
-    uus_leht = andmebaas(veebileht=suvakad_tahed, viimane_uuendus=last_update)
+    uus_leht = andmebaas(veebileht=suvakad_tahed, viimane_uuendus=last_update,
+                         list_1 = "",
+                         list_1_checked = "", 
+                         list_2 = "",
+                         list_2_checked = "",
+                         list_3 = "",
+                         list_3_checked = "",
+                         list_4 = "",
+                         list_4_checked = "",
+                         list_5 = "",
+                         list_5_checked = "",
+                         list_6 = "",
+                         list_6_checked = "", 
+                         list_7 = "",
+                         list_7_checked = "",
+                         list_8 = "",
+                         list_8_checked = "",
+                         list_9 = "",
+                         list_9_checked = "",
+                         list_10 = "",
+                         list_10_checked = "",
+                         list_11 = "",
+                         list_11_checked = "", 
+                         list_12 = "",
+                         list_12_checked = "",
+                         list_13 = "",
+                         list_13_checked = "",
+                         list_14 = "",
+                         list_14_checked = "",
+                         list_15 = "",
+                         list_15_checked = "",
+                         list_16 = "",
+                         list_16_checked = "", 
+                         list_17 = "",
+                         list_17_checked = "",
+                         list_18 = "",
+                         list_18_checked = "",
+                         list_19 = "",
+                         list_19_checked = "",
+                         list_20 = "",
+                         list_20_checked = "")
     db.session.add(uus_leht)
     db.session.commit()
     
@@ -129,26 +169,47 @@ def kasutaja_checklist(veebileht_str, id):
         
         # kui on uus päev, siis checklist un-checked
         if int(last_update) != x.day:
-            kasutaja.list_1_checked = 0
-            kasutaja.list_2_checked = 0
-            kasutaja.list_3_checked = 0
-            kasutaja.list_4_checked = 0
-            kasutaja.list_5_checked = 0
-            kasutaja.list_6_checked = 0
-            kasutaja.list_7_checked = 0
-            kasutaja.list_8_checked = 0
-            kasutaja.list_9_checked = 0
-            kasutaja.list_10_checked = 0
-            kasutaja.list_11_checked = 0
-            kasutaja.list_12_checked = 0
-            kasutaja.list_13_checked = 0
-            kasutaja.list_14_checked = 0
-            kasutaja.list_15_checked = 0
-            kasutaja.list_16_checked = 0
-            kasutaja.list_17_checked = 0
-            kasutaja.list_18_checked = 0
-            kasutaja.list_19_checked = 0
-            kasutaja.list_20_checked = 0
+            
+            if kasutaja.list_1 != "":
+                kasutaja.list_1_checked = 0
+            if kasutaja.list_2 != "":
+                kasutaja.list_2_checked = 0
+            if kasutaja.list_3 != "":
+                kasutaja.list_3_checked = 0
+            if kasutaja.list_4 != "":
+                kasutaja.list_4_checked = 0
+            if kasutaja.list_5 != "":
+                kasutaja.list_5_checked = 0
+            if kasutaja.list_6 != "":
+                kasutaja.list_6_checked = 0
+            if kasutaja.list_7 != "":
+                kasutaja.list_7_checked = 0
+            if kasutaja.list_8 != "":
+                kasutaja.list_8_checked = 0
+            if kasutaja.list_9 != "":
+                kasutaja.list_9_checked = 0
+            if kasutaja.list_10 != "":
+                kasutaja.list_10_checked = 0
+            if kasutaja.list_11 != "":
+                kasutaja.list_11_checked = 0
+            if kasutaja.list_12 != "":
+                kasutaja.list_12_checked = 0
+            if kasutaja.list_13 != "":
+                kasutaja.list_13_checked = 0
+            if kasutaja.list_14 != "":
+                kasutaja.list_14_checked = 0
+            if kasutaja.list_15 != "":
+                kasutaja.list_15_checked = 0
+            if kasutaja.list_16 != "":
+                kasutaja.list_16_checked = 0
+            if kasutaja.list_17 != "":
+                kasutaja.list_17_checked = 0
+            if kasutaja.list_18 != "":
+                kasutaja.list_18_checked = 0
+            if kasutaja.list_19 != "":
+                kasutaja.list_19_checked = 0
+            if kasutaja.list_20 != "":
+                kasutaja.list_20_checked = 0
             
             kasutaja.viimane_uuendus = x.day
             db.session.commit()
@@ -506,8 +567,65 @@ def edit(veebileht_str, id):
     if veebikood == veebileht_str:
         if request.method == 'POST':
             kasutaja.list_1 = request.form['list_1']
-            if kasutaja.list_1_checked == "":
+            if kasutaja.list_1 != "":
                 kasutaja.list_1_checked = 0
+            kasutaja.list_2 = request.form['list_2']
+            if kasutaja.list_2 != "":
+                kasutaja.list_2_checked = 0
+            kasutaja.list_3 = request.form['list_3']
+            if kasutaja.list_3 != "":
+                kasutaja.list_3_checked = 0
+            kasutaja.list_4 = request.form['list_4']
+            if kasutaja.list_4 != "":
+                kasutaja.list_4_checked = 0
+            kasutaja.list_5 = request.form['list_5']
+            if kasutaja.list_5 != "":
+                kasutaja.list_5_checked = 0
+            kasutaja.list_6 = request.form['list_6']
+            if kasutaja.list_6 != "":
+                kasutaja.list_6_checked = 0
+            kasutaja.list_7 = request.form['list_7']
+            if kasutaja.list_7 != "":
+                kasutaja.list_7_checked = 0
+            kasutaja.list_8 = request.form['list_8']
+            if kasutaja.list_8 != "":
+                kasutaja.list_8_checked = 0
+            kasutaja.list_9 = request.form['list_9']
+            if kasutaja.list_9 != "":
+                kasutaja.list_9_checked = 0
+            kasutaja.list_10 = request.form['list_10']
+            if kasutaja.list_10 != "":
+                kasutaja.list_10_checked = 0
+            kasutaja.list_11 = request.form['list_11']
+            if kasutaja.list_11 != "":
+                kasutaja.list_11_checked = 0
+            kasutaja.list_12 = request.form['list_12']
+            if kasutaja.list_12 != "":
+                kasutaja.list_12_checked = 0
+            kasutaja.list_13 = request.form['list_13']
+            if kasutaja.list_13 != "":
+                kasutaja.list_13_checked = 0
+            kasutaja.list_14 = request.form['list_14']
+            if kasutaja.list_14 != "":
+                kasutaja.list_14_checked = 0
+            kasutaja.list_15 = request.form['list_15']
+            if kasutaja.list_15 != "":
+                kasutaja.list_15_checked = 0
+            kasutaja.list_16 = request.form['list_16']
+            if kasutaja.list_16 != "":
+                kasutaja.list_16_checked = 0
+            kasutaja.list_17 = request.form['list_17']
+            if kasutaja.list_17 != "":
+                kasutaja.list_17_checked = 0
+            kasutaja.list_18 = request.form['list_18']
+            if kasutaja.list_18 != "":
+                kasutaja.list_18_checked = 0
+            kasutaja.list_19 = request.form['list_19']
+            if kasutaja.list_19 != "":
+                kasutaja.list_19_checked = 0
+            kasutaja.list_20 = request.form['list_20']
+            if kasutaja.list_20 != "":
+                kasutaja.list_20_checked = 0
             db.session.commit()
             return redirect('/checklist/' + veebikood + "/" + str(id))
         else:
